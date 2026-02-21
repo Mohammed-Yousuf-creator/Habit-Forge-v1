@@ -1,0 +1,275 @@
+/* ============================================
+   HABITFORGE — Landing Page
+   Fonts: Space Grotesk (headings), Inter (
+
+/* ---------- Custom Properties ---------- */
+:root {
+  --yellow-green: rgb(215, 255, 71);
+  --lime: #ceff1a;
+  --light-gray: #e2dadb;
+  --red: #ff1b1c;
+  --blue: #3993dd;
+  --dark: #1a1a1a;
+  --white: #ffffff;
+
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--dark);
+  background-color: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 4rem;
+  background-color: var(--dark);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--lime);
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+a {
+    text-decoration: none;
+}
+.nav-btn {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.55rem 1.4rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--light-gray);
+  cursor: pointer;
+  transition: color 0.25s ease,
+              background-color 0.25s ease,
+              border-color 0.25s ease;
+}
+
+/* #1 — About button hover turns red */
+.btn-about:hover {
+  color: var(--red);
+}
+
+.btn-login {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.btn-login:hover {
+  background-color: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+}
+
+.btn-signup {
+  background-color: var(--lime);
+  color: var(--dark);
+  border-color: var(--lime);
+  font-weight: 600;
+}
+.btn-signup:hover {
+    background-color: var(--yellow-green);
+    color: var(--white);
+    border-color: var(--yellow-green);
+    
+}
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem;
+  background: linear-gradient(
+    135deg,
+    var(--dark) 0%,
+    #0d2f5c 55%,
+    var(--blue) 100%
+  );
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--lime);
+  letter-spacing: -3px;
+  margin-bottom: 1rem;
+}
+
+.hero h2 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+
+/* #2 — "Forging" keyword highlighted red */
+.highlight-red {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.hero h3 {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--light-gray);
+  opacity: 0.85;
+}
+
+/* ============================================
+   ABOUT  — side-by-side cards
+   ============================================ */
+.about {
+  padding: 5rem 4rem;
+  background-color: var(--light-gray);
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* #6 — Red left border accent on cards */
+.block {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  background-color: var(--white);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+  border-left: 5px solid var(--red);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.12);
+}
+
+/* Alternate layout for every even card */
+.block:nth-child(even) {
+  flex-direction: row-reverse;
+  border-left: none;
+  border-right: 5px solid var(--red);
+}
+
+/* ---------- Placeholder Image ---------- */
+.block-img {
+  width: 340px;
+  min-height: 230px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--dark), var(--blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Text Content ---------- */
+.content {
+  flex: 1;
+}
+
+.content h2 {
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+/* Lime accent underline — card 1 */
+.content h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--lime);
+}
+
+/* #3 — Second card underline turns red */
+.block:nth-child(even) .content h2::after {
+  background-color: var(--red);
+  right: auto;
+  left: 0;
+}
+
+.content p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #4a4a4a;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem 4rem;
+  background-color: var(--dark);
+  color: var(--light-gray);
+  font-size: 0.9rem;
+}
+
+/* #4 — Copyright icon styled red */
+.footer-icon {
+  color: var(--red);
+  font-size: 1rem;
+}

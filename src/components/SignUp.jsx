@@ -1,0 +1,6 @@
+import React from "react"
+export default function Signup() {
+    return (
+        <h1>Sign up logic will go here</h1>
+    )
+}
