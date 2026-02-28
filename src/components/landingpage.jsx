@@ -22,7 +22,7 @@ export default function Landingpage() {
         </div>
         <nav className="nav">
           <button onClick={() => scroll("about")} className="nav-btn btn-about">About</button>
-          <Link to="/login" className="nav-btn btn-login">Log in</Link>
+          <Link to="/login" className="nav-btn btn-login">Sign in</Link>
           <Link to="/signup" className="nav-btn btn-signup">Sign up</Link>
         </nav>
       </header>

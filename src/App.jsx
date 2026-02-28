@@ -5,10 +5,14 @@ import Login from "./components/Login.jsx"
 import Signup from "./components/SignUp.jsx"
 import Habits from "./components/Habits.jsx"
 import HabitForge from "./components/MakeHabit.jsx"
+import { AuthProvider } from "./Context/authcontext.jsx"
 export default function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
+      
       <Routes>
+        
         <Route path="/" element={<LandingPage />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/signup" element={<Signup />}/>
@@ -16,5 +20,6 @@ export default function App() {
         <Route path="/habits/new" element={<HabitForge />}/>
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   )
 }
