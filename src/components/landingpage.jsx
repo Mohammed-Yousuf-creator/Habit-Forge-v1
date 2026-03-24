@@ -5,13 +5,11 @@ import { FaTools } from "react-icons/fa";
 
 export default function Landingpage() {
   function scroll(id) {
-    document.querySelector(`#${id}`).scrollIntoView(
-        {
-            behavior: "smooth",
-            block: "start",
-            inline: "nearest"
-        }
-    )
+    document.querySelector(`#${id}`).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
   }
   return (
     <>
@@ -21,9 +19,15 @@ export default function Landingpage() {
           <span>HabitForge</span>
         </div>
         <nav className="nav">
-          <button onClick={() => scroll("about")} className="nav-btn btn-about">About</button>
-          <Link to="/login" className="nav-btn btn-login">Sign in</Link>
-          <Link to="/signup" className="nav-btn btn-signup">Sign up</Link>
+          <button onClick={() => scroll("about")} className="nav-btn btn-about">
+            About
+          </button>
+          <Link to="/login" className="nav-btn btn-login">
+            Sign in
+          </Link>
+          <Link to="/signup" className="nav-btn btn-signup">
+            Sign up
+          </Link>
         </nav>
       </header>
 

@@ -1,8 +1,11 @@
 /* ============================================
-   HABITFORGE — Landing Page
-   Fonts: Space Grotesk (headings), Inter (
+   HABITFORGE — Complete Stylesheet
+   Fonts: Space Grotesk (headings), Inter (body)
+   ============================================ */
 
-/* ---------- Custom Properties ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap");
+
+/* ---------- Custom Properties (SINGLE source) ---------- */
 :root {
   --yellow-green: rgb(215, 255, 71);
   --lime: #ceff1a;
@@ -16,7 +19,7 @@
   --font-body: "Inter", sans-serif;
 }
 
-/* ---------- Reset ---------- */
+/* ---------- Reset (SINGLE source) ---------- */
 *,
 *::before,
 *::after {
@@ -41,6 +44,16 @@ img {
   display: block;
   max-width: 100%;
 }
+
+a {
+  text-decoration: none;
+}
+
+/* ============================================
+   ============================================
+   LANDING PAGE
+   ============================================
+   ============================================ */
 
 /* ============================================
    HEADER
@@ -74,9 +87,7 @@ img {
   align-items: center;
   gap: 0.75rem;
 }
-a {
-    text-decoration: none;
-}
+
 .nav-btn {
   font-family: var(--font-body);
   font-size: 0.95rem;
@@ -92,7 +103,6 @@ a {
               border-color 0.25s ease;
 }
 
-/* #1 — About button hover turns red */
 .btn-about:hover {
   color: var(--red);
 }
@@ -114,25 +124,43 @@ a {
   border-color: var(--lime);
   font-weight: 600;
 }
+
 .btn-signup:hover {
-    background-color: var(--yellow-green);
-    color: var(--white);
-    border-color: var(--yellow-green);
-    
+  background-color: var(--yellow-green);
+  color: var(--white);
+  border-color: var(--yellow-green);
 }
+
+/* ============================================
+   HERO — Forge Background (Clean)
+   ============================================ */
 .hero {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 8rem 2rem;
-  background: linear-gradient(
-    135deg,
-    var(--dark) 0%,
-    #0d2f5c 55%,
-    var(--blue) 100%
-  );
+  padding: 10rem 2rem;
+  background:
+    url("https://images.unsplash.com/photo-1584246689788-3b2c4972fd7e?w=1920&auto=format&fit=crop&q=80")
+      center / cover no-repeat;
+  background-attachment: fixed;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 26, 26, 0.72);
+  pointer-events: none;
+}
+
+.hero h1,
+.hero h2,
+.hero h3 {
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -142,6 +170,8 @@ a {
   color: var(--lime);
   letter-spacing: -3px;
   margin-bottom: 1rem;
+  text-shadow: 0 2px 30px rgba(206, 255, 26, 0.2);
+  animation: hero-fade-up 0.7s ease-out;
 }
 
 .hero h2 {
@@ -150,9 +180,10 @@ a {
   font-weight: 400;
   color: var(--white);
   margin-bottom: 0.6rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  animation: hero-fade-up 0.7s ease-out 0.15s both;
 }
 
-/* #2 — "Forging" keyword highlighted red */
 .highlight-red {
   color: var(--red);
   font-weight: 700;
@@ -163,11 +194,23 @@ a {
   font-size: 1.1rem;
   font-weight: 300;
   color: var(--light-gray);
-  opacity: 0.85;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  animation: hero-fade-up 0.7s ease-out 0.3s both;
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ============================================
-   ABOUT  — side-by-side cards
+   ABOUT — side-by-side cards
    ============================================ */
 .about {
   padding: 5rem 4rem;
@@ -177,7 +220,6 @@ a {
   gap: 3rem;
 }
 
-/* #6 — Red left border accent on cards */
 .block {
   display: flex;
   align-items: center;
@@ -195,14 +237,12 @@ a {
   box-shadow: 0 10px 36px rgba(0, 0, 0, 0.12);
 }
 
-/* Alternate layout for every even card */
 .block:nth-child(even) {
   flex-direction: row-reverse;
   border-left: none;
   border-right: 5px solid var(--red);
 }
 
-/* ---------- Placeholder Image ---------- */
 .block-img {
   width: 340px;
   min-height: 230px;
@@ -214,7 +254,6 @@ a {
   justify-content: center;
 }
 
-/* ---------- Text Content ---------- */
 .content {
   flex: 1;
 }
@@ -229,7 +268,6 @@ a {
   padding-bottom: 0.75rem;
 }
 
-/* Lime accent underline — card 1 */
 .content h2::after {
   content: "";
   position: absolute;
@@ -241,7 +279,6 @@ a {
   background-color: var(--lime);
 }
 
-/* #3 — Second card underline turns red */
 .block:nth-child(even) .content h2::after {
   background-color: var(--red);
   right: auto;
@@ -268,8 +305,290 @@ a {
   font-size: 0.9rem;
 }
 
-/* #4 — Copyright icon styled red */
 .footer-icon {
   color: var(--red);
   font-size: 1rem;
+}
+
+/* ============================================
+   ============================================
+   AUTH PAGES (Login & Signup)
+   ============================================
+   ============================================ */
+
+/* ============================================
+   PAGE — Background Image + Dark Overlay
+   ============================================ */
+body:has(form.login),
+body:has(form.signup) {
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(26, 26, 26, 0.65),
+      rgba(26, 26, 26, 0.75)
+    ),
+    url("https://images.unsplash.com/photo-1584246689788-3b2c4972fd7e?w=1920&auto=format&fit=crop&q=80")
+      center / cover no-repeat fixed;
+}
+
+body:has(form.login) #root,
+body:has(form.signup) #root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ============================================
+   AUTH — Heading
+   ============================================ */
+body:has(form.login) h1,
+body:has(form.signup) h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -1px;
+  margin-bottom: 1.75rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  animation: fade-down 0.5s ease-out;
+}
+
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   AUTH — Glass Card (Main Email Form)
+   ============================================ */
+form.login:not(.Google),
+form.signup:not(.Google) {
+  position: relative;
+  width: 420px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  margin-bottom: 0.75rem;
+  animation: fade-up 0.6s ease-out 0.1s both;
+}
+
+form.login:not(.Google)::before,
+form.signup:not(.Google)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   AUTH — Labels
+   ============================================ */
+form.login label,
+form.signup label {
+  color: var(--white);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-align: left;
+  margin-top: 0.4rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+form.login label:first-of-type,
+form.signup label:first-of-type {
+  margin-top: 0;
+}
+
+/* ============================================
+   AUTH — Inputs
+   ============================================ */
+form.login input,
+form.signup input {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+form.login input:focus,
+form.signup input:focus {
+  border-color: var(--lime);
+  box-shadow: 0 0 0 3px rgba(206, 255, 26, 0.15);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+form.login input::placeholder,
+form.signup input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================
+   AUTH — Primary Button (Enter / Confirm)
+   ============================================ */
+form.login:not(.Google) button,
+form.signup:not(.Google) button {
+  background: var(--lime);
+  color: var(--dark);
+  border: none;
+  border-radius: 12px;
+  padding: 0.85rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  letter-spacing: 0.3px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+form.login:not(.Google) button:hover,
+form.signup:not(.Google) button:hover {
+  background: var(--red);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 27, 28, 0.3);
+}
+
+form.login:not(.Google) button:active,
+form.signup:not(.Google) button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ============================================
+   AUTH — OR Divider
+   ============================================ */
+form.Google::before {
+  content: "— or —";
+  display: block;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-body);
+}
+
+/* ============================================
+   AUTH — Google Button (Glass Secondary)
+   ============================================ */
+form.Google {
+  width: 420px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  animation: fade-up 0.6s ease-out 0.25s both;
+}
+
+form.Google button {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.8rem;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s ease;
+}
+
+form.Google button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+form.Google button:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   AUTH — Bottom Text & Link
+   ============================================ */
+body:has(form.login) #root > a,
+body:has(form.signup) #root > a {
+  color: var(--lime);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 0.35rem;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+body:has(form.login) #root > a:hover,
+body:has(form.signup) #root > a:hover {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
 }

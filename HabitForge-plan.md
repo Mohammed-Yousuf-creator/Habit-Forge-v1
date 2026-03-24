@@ -27,3 +27,4 @@
     description:
     days: 
     isChecked:
+    streak: 

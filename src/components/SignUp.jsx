@@ -1,11 +1,10 @@
-
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
-import { logInWithGoogle, SignUp } from "../../firebaseConfig";
+import { logInWithGoogle, SignUp } from "../../firebaseFunction";
 import { useAuth } from "../Context/authcontext";
 export default function Signup() {
-  const {userLoggedIn} = useAuth()
+  const { userLoggedIn } = useAuth();
   const [isRegistering, setIsRegistering] = React.useState(false);
   async function handleEmailSignUp(formData) {
     try {
@@ -19,18 +18,18 @@ export default function Signup() {
   }
   async function handleGoogleSignUp() {
     try {
-    if(!isRegistering) {
-        setIsRegistering(true)
-        logInWithGoogle()
-    }}
-    catch(error) {
-        console.log(error)
+      if (!isRegistering) {
+        setIsRegistering(true);
+        logInWithGoogle();
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
   return (
     <>
-      {userLoggedIn ? <Navigate to={"/habits"} replace/>: null}
+      {userLoggedIn ? <Navigate to={"/habits"} replace /> : null}
       <h1>Sign Up</h1>
       <form action={handleEmailSignUp} className="signup">
         <label htmlFor="email">Email</label>
@@ -49,6 +48,7 @@ export default function Signup() {
           <FaGoogle /> Signup with Google
         </button>
       </form>
+      Already have an account? <Link to="/login">Login</Link>
     </>
   );
 }
