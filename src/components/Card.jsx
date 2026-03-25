@@ -31,7 +31,7 @@ export function Card({ clicked, setClicked, item, options, index, id, handleDele
             <div className="HabitCard">
                 <label htmlFor="checked"><h1>Title: </h1></label>
                 <span onClick={toggle}><RiArrowDropUpLine /></span>
-                <input type="radio" name="checked"></input>
+                <input type="checkbox" name="checked"></input>
                 <h3>{item.title}</h3>
                 <h2>Description</h2>
                 <h4>{item.description}</h4>
