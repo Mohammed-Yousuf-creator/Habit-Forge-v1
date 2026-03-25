@@ -41,15 +41,7 @@ export function Card({ clicked, setClicked, item, options, index, id, handleDele
                         <li key={index}>{day}</li>
                     ))}
                 </ol>
-                <h2>Streak</h2>
-                <ol>
-                    {item.history.map((entry, index) => (
-                        <li key={index}>
-                            {entry.toDate().toLocaleDateString(undefined, options)}
-                        </li>
-                    ))}
-                </ol>
-
+                <h2>Streak: {}</h2>
                 <button onClick={handleEdit}>Edit</button>
                 <button onClick={handle}>Delete</button>
             </div>

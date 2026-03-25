@@ -72,4 +72,4 @@ export async function checkHabit(habitId, userId) {
 
 }
 export async function streakBreak(habitId, userId) {}
-
+export async function unCheckHabit(habitId, userId) {}
