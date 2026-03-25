@@ -6,6 +6,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { deleteHabit } from "../../firebaseFunction";
 import { useAuth } from "../Context/authcontext";
 export function Card({ clicked, setClicked, item, options, index, id, handleDelete}) {
+    const date = new Date()
+    const day = date.getDay()
     function toggle() {
         setClicked(
             clicked.map((click, i) => {
@@ -25,9 +27,8 @@ export function Card({ clicked, setClicked, item, options, index, id, handleDele
     async function handle() {
         await handleDelete(id)
     }
-    
     return (
-        !clicked[index] ? <><h1>{item.title}</h1><span onClick={toggle}><RiArrowDropDownLine /></span></> :
+        !clicked[index] ? <><h1>{item.title}</h1><input disabled={item.schedule.includes(day)} type="checkbox" name="checked"></input><span onClick={toggle}><RiArrowDropDownLine /></span></> :
             <div className="HabitCard">
                 <label htmlFor="checked"><h1>Title: </h1></label>
                 <span onClick={toggle}><RiArrowDropUpLine /></span>
