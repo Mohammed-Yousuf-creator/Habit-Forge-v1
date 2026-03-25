@@ -3,11 +3,12 @@ import React from "react";
 import { RiArrowDropUpLine } from "react-icons/ri";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Navigate, useNavigate } from "react-router-dom";
-import { deleteHabit } from "../../firebaseFunction";
+import { deleteHabit, updateHabitHistory } from "../../firebaseFunction";
 import { useAuth } from "../Context/authcontext";
-export function Card({ clicked, setClicked, item, options, index, id, handleDelete}) {
+export function Card({ clicked, setClicked, item, options, index, id, handleDelete }) {
     const date = new Date()
     const day = date.getDay()
+    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
     function toggle() {
         setClicked(
             clicked.map((click, i) => {
@@ -19,6 +20,7 @@ export function Card({ clicked, setClicked, item, options, index, id, handleDele
             }),
         );
     }
+    const history = item.history.map(day => day.toDate().toLocaleDateString(undefined, options))
 
     let navigate = useNavigate()
     function handleEdit() {
@@ -28,11 +30,29 @@ export function Card({ clicked, setClicked, item, options, index, id, handleDele
         await handleDelete(id)
     }
     return (
-        !clicked[index] ? <><h1>{item.title}</h1><input disabled={item.schedule.includes(day)} type="checkbox" name="checked"></input><span onClick={toggle}><RiArrowDropDownLine /></span></> :
+        !clicked[index] ? <>
+            <h1>{item.title}</h1>
+            <input
+                disabled={!item.schedule.includes(days[day])}
+                checked={history.includes(date.toLocaleDateString(undefined, options))}
+                type="checkbox" 
+                name="checked"
+                onChange={updateHabitHistory}
+            />
+            <span onClick={toggle}>
+                <RiArrowDropDownLine />
+            </span>
+        </> :
             <div className="HabitCard">
                 <label htmlFor="checked"><h1>Title: </h1></label>
                 <span onClick={toggle}><RiArrowDropUpLine /></span>
-                <input type="checkbox" name="checked"></input>
+                <input
+                    type="checkbox"
+                    name="checked"
+                    checked={history.includes(date.toLocaleDateString(undefined, options))}
+                    disabled={!item.schedule.includes(days[day])}
+                     
+                />
                 <h3>{item.title}</h3>
                 <h2>Description</h2>
                 <h4>{item.description}</h4>
@@ -42,7 +62,7 @@ export function Card({ clicked, setClicked, item, options, index, id, handleDele
                         <li key={index}>{day}</li>
                     ))}
                 </ol>
-                <h2>Streak: {}</h2>
+                <h2>Streak: { }</h2>
                 <button onClick={handleEdit}>Edit</button>
                 <button onClick={handle}>Delete</button>
             </div>

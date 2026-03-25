@@ -68,8 +68,7 @@ export async function getHabit(habitId, userId) {
     return false
   }
 }
-export async function checkHabit(habitId, userId) {
+export async function updateHabitHistory(habitId, userId, status, date) {
 
 }
 export async function streakBreak(habitId, userId) {}
-export async function unCheckHabit(habitId, userId) {}

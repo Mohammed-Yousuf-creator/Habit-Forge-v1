@@ -34,7 +34,8 @@ export default function UpdateHabit() {
         getHabits()
     }, [loading])
     async function handleFormSubmit(formData) {
-        const newHabit = {
+        if (formData.get("Update")) {
+            const newHabit = {
             title: formData.get("title"),
             description: formData.get("description"),
             schedule: newItem.schedule,
@@ -43,9 +44,20 @@ export default function UpdateHabit() {
         
         if (!loading) {
             await updateHabit(id, currentUser.uid, newHabit)
+            navigate("/habits")
         }
-
-        navigate("/habits")
+        } else {
+            navigate("/habits")
+        }
+    }
+    function sortInsert(day1, day2) {
+        if (days.indexOf(day1) > days.indexOf(day2)) {
+            return 1
+        }
+        else if (days.indexOf(day1) < days.indexOf(day2)) {
+            return -1
+        }
+        return 0
     }
     return (
         !item ? <h1>Loading...</h1> :
@@ -69,27 +81,11 @@ export default function UpdateHabit() {
                     id="schedule"
                     isSearchable={true}
                     isClearable={true}
-                    onChange={(s) => setNewItem({ ...item, schedule: s ? s.map(i => {
-                        if (i.value === "sunday") {
-                            return i.value
-                        } else if (i.value === "monday") {
-                            return i.value
-                        } else if (i.value === "tuesday") {
-                            return i.value
-                        } else if (i.value === "wednesday") {
-                            return i.value
-                        } else if (i.value === "thursday") {
-                            return i.value
-                        } else if (i.value === "friday") {
-                            return i.value
-                        } else {
-                            return i.value
-                        }
-                    }) : [] })}
+                    onChange={(s) => setNewItem({ ...item, schedule: s ? s.map(i => i.value).sort(sortInsert) : [] })}
                     defaultValue={item.schedule.map(day => ({ value: day, label: day }))}
                 />
-                <button disabled={newItem == item}>update Habit</button>
-                <button onClick={() => navigate("/habits")}>Cancel</button>
+                <button disabled={newItem == item} name="Update">update Habit</button>
+                <button name="Cancel">Cancel</button>
             </form>
     );
 }

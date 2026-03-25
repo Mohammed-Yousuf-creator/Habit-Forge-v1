@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,8 @@ export default function MakeHabit() {
     const {currentUser, loading} = useAuth()
     const navigate = useNavigate()
     async function handleFormSubmit(formData) {
-        const habit = {
+        if (formData.get("Create")) {
+            const habit = {
             title: formData.get("title"),
             description: formData.get("description"),
             schedule: selected,
@@ -21,16 +22,20 @@ export default function MakeHabit() {
             await addHabit(currentUser.uid, habit)
             navigate("/habits")
         }
+        } else {
+            navigate("/habits")
+        }
+        
        
     }
-    function SortInsert(value) {
-        let sortedSelected = [] 
-        for (let day of selected) {
-            const indexInDayArray = days.indexOf(day)
-            if (indexInDayArray === 0) {
-                sortedSelected.push(day)
-            } 
+    function sortInsert(day1, day2) {
+        if (days.indexOf(day1) > days.indexOf(day2)) {
+            return 1
         }
+        else if (days.indexOf(day1) < days.indexOf(day2)) {
+            return -1
+        }
+        return 0
     }
     return (
         <form action={handleFormSubmit}>
@@ -39,8 +44,9 @@ export default function MakeHabit() {
             <label htmlFor="description">Description</label>
             <textarea name="description" id="description" />
             <label htmlFor="schedule">Schedule</label>
-            <Select options={dayOptions} isMulti name="schedule" onChange={s =>  setSelected(s ? s.map(i => SortInsert(i.value)) : []) } id="schedule" />
-            <button>Create Habit</button>
+            <Select options={dayOptions} isMulti name="schedule" onChange={s =>  setSelected(s ? s.map(i => i.value).sort(sortInsert) : []) } id="schedule" />
+            <button name="Create">Create Habit</button>
+            <button name="Cancel">Cancel</button>
         </form>
     );
 }
