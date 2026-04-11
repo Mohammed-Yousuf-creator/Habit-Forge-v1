@@ -5,6 +5,7 @@ import Login from "./components/Login.jsx"
 import Signup from "./components/SignUp.jsx"
 import Habits from "./components/Habits.jsx"
 import HabitForge from "./components/MakeHabit.jsx"
+import NotFound from "./components/NotFound.jsx"
 import { AuthProvider } from "./Context/authcontext.jsx"
 import ProtectedRoute from "./protectedRoute.jsx"
 import UpdateHabit from "./components/UpdateHabit.jsx"
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/habit/new" element={<HabitForge />}/>
           <Route path="/habit/update/:id" element={<UpdateHabit />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
     </AuthProvider>

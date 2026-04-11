@@ -52,16 +52,7 @@ export default function Landingpage() {
               </p>
             </div>
           </div>
-          <div className="block">
-            <img className="block-img" alt="Easy tracking" />
-            <div className="content">
-              <h2>Easy tracking of Habits</h2>
-              <p>
-                This website allows for the easy tracking of Habits as there is
-                nothing in this environt that can distract you
-              </p>
-            </div>
-          </div>
+          
         </section>
       </main>
 

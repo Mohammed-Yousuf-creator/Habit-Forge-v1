@@ -1,14 +1,15 @@
-/* eslint-disable no-unused-vars */
+
 import React from "react";
 import { RiArrowDropUpLine } from "react-icons/ri";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { Navigate, useNavigate } from "react-router-dom";
-import { deleteHabit, updateHabitHistory } from "../../firebaseFunction";
-import { useAuth } from "../Context/authcontext";
-export function Card({ clicked, setClicked, item, options, index, id, handleDelete }) {
+import { useNavigate } from "react-router-dom";
+
+export function Card({ clicked, setClicked, item, index, id, handleDelete, handleCheck, checked, streak}) {
     const date = new Date()
     const day = date.getDay()
     const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+    const schedule = Array.isArray(item.schedule) ? item.schedule : []
+
     function toggle() {
         setClicked(
             clicked.map((click, i) => {
@@ -20,51 +21,60 @@ export function Card({ clicked, setClicked, item, options, index, id, handleDele
             }),
         );
     }
-    const history = item.history.map(day => day.toDate().toLocaleDateString(undefined, options))
-
     let navigate = useNavigate()
     function handleEdit() {
         navigate(`/habit/update/${id}`)
     }
-    async function handle() {
-        await handleDelete(id)
-    }
     return (
-        !clicked[index] ? <>
-            <h1>{item.title}</h1>
-            <input
-                disabled={!item.schedule.includes(days[day])}
-                checked={history.includes(date.toLocaleDateString(undefined, options))}
-                type="checkbox" 
-                name="checked"
-                onChange={updateHabitHistory}
-            />
-            <span onClick={toggle}>
-                <RiArrowDropDownLine />
-            </span>
-        </> :
-            <div className="HabitCard">
-                <label htmlFor="checked"><h1>Title: </h1></label>
-                <span onClick={toggle}><RiArrowDropUpLine /></span>
+        !clicked[index] ? <article className="habit-card habit-card--collapsed">
+            <h2 className="habit-card__title">{item.title}</h2>
+            <div className="habit-card__controls">
                 <input
+                    className="habit-card__checkbox"
+                    disabled={!schedule.includes(days[day])}
+                    checked={!!checked[index]}
                     type="checkbox"
                     name="checked"
-                    checked={history.includes(date.toLocaleDateString(undefined, options))}
-                    disabled={!item.schedule.includes(days[day])}
-                     
+                    onChange={(e) => handleCheck(e, index, id, date)}
                 />
-                <h3>{item.title}</h3>
+                <span className="habit-card__toggle" onClick={toggle}>
+                    <RiArrowDropDownLine />
+                </span>
+            </div>
+        </article> :
+            <article className="HabitCard habit-card habit-card--expanded">
+                <div className="habit-card__header">
+                    <div className="habit-card__heading">
+                        <h2>Title</h2>
+                        <h3 className="habit-card__value">{item.title}</h3>
+                    </div>
+                    <div className="habit-card__controls">
+                        <input
+                            className="habit-card__checkbox"
+                            type="checkbox"
+                            name="checked"
+                            checked={!!checked[index]}
+                            disabled={!schedule.includes(days[day])}
+                            onChange={(e) => handleCheck(e, index, id, date)}
+                        />
+                        <span className="habit-card__toggle" onClick={toggle}><RiArrowDropUpLine /></span>
+                    </div>
+                </div>
+                
+                
                 <h2>Description</h2>
                 <h4>{item.description}</h4>
                 <h2>Days</h2>
                 <ol>
-                    {item.schedule.map((day, index) => (
+                    {schedule.map((day, index) => (
                         <li key={index}>{day}</li>
                     ))}
                 </ol>
-                <h2>Streak: { }</h2>
-                <button onClick={handleEdit}>Edit</button>
-                <button onClick={handle}>Delete</button>
-            </div>
+                <h2>Streak: {streak[index]}</h2>
+                <div className="habit-card__actions">
+                    <button type="button" className="btn btn--secondary" onClick={handleEdit}>Edit</button>
+                    <button type="button" className="btn btn--danger" onClick={() => handleDelete(id, index)}>Delete</button>
+                </div>
+            </article>
     );
 }
