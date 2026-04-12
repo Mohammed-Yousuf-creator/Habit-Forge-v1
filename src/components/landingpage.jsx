@@ -43,7 +43,7 @@ export default function Landingpage() {
 
         <section className="about" id="about">
           <div className="block">
-            <img className="block-img" alt="One tap logging" />
+            <img className="block-img" alt="One tap logging" src="src\assets\Screenshot 2026-04-11 143435.png"/>
             <div className="content">
               <h2>One tap logging of Habits</h2>
               <p>
