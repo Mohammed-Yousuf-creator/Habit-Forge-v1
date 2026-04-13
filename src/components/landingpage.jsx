@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaCopyright } from "react-icons/fa6";
 import { FaTools } from "react-icons/fa";
+import oneTapLoggingImage from "../assets/Screenshot 2026-04-11 143435.png";
 
 export default function Landingpage() {
   function scroll(id) {
@@ -43,7 +44,7 @@ export default function Landingpage() {
 
         <section className="about" id="about">
           <div className="block">
-            <img className="block-img" alt="One tap logging" src="src\assets\Screenshot 2026-04-11 143435.png"/>
+            <img className="block-img" alt="One tap logging" src={oneTapLoggingImage} />
             <div className="content">
               <h2>One tap logging of Habits</h2>
               <p>
